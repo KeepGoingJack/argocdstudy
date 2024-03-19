@@ -1,0 +1,86 @@
+kserve:
+  agent:
+    image: kserve/agent
+    tag: v0.10.2
+  controller:
+    deploymentMode: Serverless
+    gateway:
+      domain: example.com
+      ingressGateway:
+        gateway: knative-serving/knative-ingress-gateway
+        gatewayService: istio-ingressgateway.istio-system.svc.cluster.local
+      localGateway:
+        gateway: knative-serving/knative-local-gateway
+        gatewayService: knative-local-gateway.istio-system.svc.cluster.local
+    image: kserve/kserve-controller
+    resources:
+      limits:
+        cpu: 100m
+        memory: 300Mi
+      requests:
+        cpu: 100m
+        memory: 300Mi
+    tag: v0.10.2
+  metricsaggregator:
+    enableMetricAggregation: "false"
+    enablePrometheusScraping: "false"
+  modelmesh:
+    config:
+      modelmeshImage: kserve/modelmesh
+      modelmeshImageTag: v0.10.0
+      modelmeshRuntimeAdapterImage: kserve/modelmesh-runtime-adapter
+      modelmeshRuntimeAdapterImageTag: v0.10.0
+      podsPerRuntime: 2
+      restProxyImage: kserve/rest-proxy
+      restProxyImageTag: v0.10.0
+    controller:
+      image: kserve/modelmesh-controller
+      tag: v0.10.0
+  modelmeshVersion: v0.10.0
+  servingruntime:
+    aix:
+      defaultVersion: v0.10.2
+      image: kserve/aix-explainer
+    alibi:
+      defaultVersion: v0.10.2
+      image: kserve/alibi-explainer
+    art:
+      defaultVersion: v0.10.2
+      image: kserve/art-explainer
+    lgbserver:
+      image: kserve/lgbserver
+      tag: v0.10.2
+    mlserver:
+      image: docker.io/seldonio/mlserver
+      modelClassPlaceholder: '{{.Labels.modelClass}}'
+      tag: 1.0.0
+    modelNamePlaceholder: '{{.Name}}'
+    paddleserver:
+      image: kserve/paddleserver
+      tag: v0.10.2
+    pmmlserver:
+      image: kserve/pmmlserver
+      tag: v0.10.2
+    sklearnserver:
+      image: kserve/sklearnserver
+      tag: v0.10.2
+    tensorflow:
+      image: tensorflow/serving
+      tag: 2.6.2
+    torchserve:
+      image: pytorch/torchserve-kfs
+      serviceEnvelopePlaceholder: '{{.Labels.serviceEnvelope}}'
+      tag: 0.6.1
+    tritonserver:
+      image: nvcr.io/nvidia/tritonserver
+      tag: 21.09-py3
+    xgbserver:
+      image: kserve/xgbserver
+      tag: v0.10.2
+  storage:
+    image: kserve/storage-initializer
+    s3:
+      accessKeyIdName: AWS_ACCESS_KEY_ID
+      secretAccessKeyName: AWS_SECRET_ACCESS_KEY
+    tag: v0.10.2
+  version: v0.10.2
