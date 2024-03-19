@@ -1,3 +1,3 @@
 pod:
   name: gittestpodhoon22222
-  image: nginx
+  image: redis
