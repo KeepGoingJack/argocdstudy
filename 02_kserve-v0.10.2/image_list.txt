@@ -1,6 +1,0 @@
- kserve/kserve-controller:v0.10.2
- gcr.io/kubebuilder/kube-rbac-proxy:v0.13.1
- tensorflow/serving:2.6.2
- kserve/agent:v0.10.2
- kserve/router:v0.10.2
- kserve/storage-initializer:v0.10.2
