@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  ##name: nginx
+  name: {{ .Values.pod.name }}
+spec:
+  containers:
+  ##- name: nginx
+  - name: gittestpodcontainerhoon1
+    ##image: nginx:1.14.2
+    image: {{ .Values.pod.image }}
